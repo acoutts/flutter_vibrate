@@ -2,6 +2,7 @@ package flutter.plugins.vibrate;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.HapticFeedbackConstants;
 
@@ -38,7 +39,29 @@ public class VibratePlugin implements MethodCallHandler {
     }
     else if(call.method.equals("canVibrate")){
       result.success(_vibrator.hasVibrator());
-    } //Feedback
+    }
+    else if (call.method.equals("click")) {
+      if(_vibrator.hasVibrator()){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+          // Fallback for phones which don't support the click effect in API 29
+          _vibrator.vibrate(40);
+        } else {
+          _vibrator.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+        }
+      }
+      result.success(null);
+    }
+    else if (call.method.equals("heavyClick")) {
+      if(_vibrator.hasVibrator()){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+          // Fallback for phones which don't support the click effect in API 29
+          _vibrator.vibrate(60);
+        } else {
+          _vibrator.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_HEAVY_CLICK));
+        }
+      }
+      result.success(null);
+    }
     else if(call.method.equals("impact")){
       if(_vibrator.hasVibrator()){
         _vibrator.vibrate(HapticFeedbackConstants.VIRTUAL_KEY);

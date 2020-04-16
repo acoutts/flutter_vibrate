@@ -1,24 +1,30 @@
 # Vibrate
+
 [![pub package](https://img.shields.io/pub/v/flutter_vibrate.svg)](https://pub.dartlang.org/packages/flutter_vibrate)
 
-A Flutter plugin to vibrate the device. 
+A Flutter plugin to vibrate the device.
 This uses all the current Haptic Feedback APIs from Apple and provides similar feedback on Android.
 
 ## Usage
+
 To use this plugin, add `flutter_vibrate` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 Make sure you add the following permissions to your Android Manifest
-``` xml
+
+```xml
 <uses-permission android:name="android.permission.VIBRATE"/>
 ```
+
 ## Usage
-``` dart
+
+```dart
 // Import package
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 ```
 
 ### Vibration
-``` dart
+
+```dart
 // Check if the device can vibrate
 bool canVibrate = await Vibrate.canVibrate;
 
@@ -36,8 +42,10 @@ final Iterable<Duration> pauses = [
 // vibrate - sleep 0.5s - vibrate - sleep 1s - vibrate - sleep 0.5s - vibrate
 Vibrate.vibrateWithPauses(pauses);
 ```
+
 ### Haptic Feedback
-``` dart
+
+```dart
 // Choose from any of these available methods
 enum FeedbackType {
   success,
@@ -47,13 +55,17 @@ enum FeedbackType {
   impact,
   heavy,
   medium,
-  light
+  light,
+  click,
+  heavyClick
 }
 
 var _type = FeedbackType.impact;
 Vibrate.feedback(_type);
 ```
+
 ## Documentation
+
 #### Android
 
 https://developer.android.com/reference/android/view/HapticFeedbackConstants
@@ -61,4 +73,3 @@ https://developer.android.com/reference/android/view/HapticFeedbackConstants
 #### iOS
 
 https://developer.apple.com/design/human-interface-guidelines/ios/user-interaction/feedback/
-

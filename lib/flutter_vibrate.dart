@@ -10,7 +10,9 @@ enum FeedbackType {
   impact,
   heavy,
   medium,
-  light
+  light,
+  click,
+  heavyClick
 }
 
 class Vibrate {
@@ -53,6 +55,12 @@ class Vibrate {
         break;
       case FeedbackType.light:
         _channel.invokeMethod('light');
+        break;
+      case FeedbackType.click:
+        _channel.invokeMethod('click');
+        break;
+      case FeedbackType.heavyClick:
+        _channel.invokeMethod('heavyClick');
         break;
       default:
     }
